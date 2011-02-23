@@ -4,7 +4,7 @@
 # Expected filename format is CAMERAMAC(mymac)_num_timestamp_autoinc-num.jpg
 # Author:  Nick Davis
 
-for f in $* 
+for f in *.jpg
 do
 	if [ -f $f ];
 	then	
@@ -22,16 +22,16 @@ do
 		if [ ! -d $datedir ];
 		then
 			mkdir $datedir
-		else
-			hourdir="$datedir/$h"
-			if [ ! -d $hourdir ];
-			then
-				mkdir $hourdir
-			else
-				echo "Moving $f to $hourdir"
-				mv $f $hourdir	
-			fi
-			
 		fi 
+
+		hourdir="$datedir/$h"
+		if [ ! -d $hourdir ];
+		then
+			mkdir $hourdir
+		fi	
+
+		echo "Moving $f to $hourdir"
+		mv $f $hourdir	
+			
 	fi
 done
